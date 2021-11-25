@@ -2,6 +2,7 @@ const int PHOTOpin = A0;
 const int PIRpin1 = 2;
 const int PIRpin2 = 3;  
 const int PIRpin3 = 4; 
+const int PIRpin4 = 5; 
 const int LEDpin1 = 8;  
 const int LEDpin2 = 9;  
 const int LEDpin3 = 10;
@@ -10,7 +11,8 @@ void setup() {
   Serial.begin(9600);  
   pinMode(PIRpin1, INPUT); 
   pinMode(PIRpin2, INPUT);  
-  pinMode(PIRpin3, INPUT);  
+  pinMode(PIRpin3, INPUT);
+  pinMode(PIRpin4, INPUT);  
   pinMode(PHOTOpin, INPUT);  
   pinMode(LEDpin1, OUTPUT);
   pinMode(LEDpin2, OUTPUT);  
@@ -22,11 +24,17 @@ void loop() {
   int sensorStatuspir1 = digitalRead(PIRpin1);
   int sensorStatuspir2 = digitalRead(PIRpin2);
   int sensorStatuspir3 = digitalRead(PIRpin3);
+  int sensorStatuspir4 = digitalRead(PIRpin4);
   if (sensorStatusphoto <200){
     digitalWrite(LEDpin1, HIGH); 
   }  
   else{
-    digitalWrite(LEDpin1, LOW); 
+    if(sensorStatuspir4 == HIGH){
+      digitalWrite(LEDpin1, HIGH);
+    }
+    else{
+      digitalWrite(LEDpin1, LOW); 
+    } 
   }
   if(sensorStatuspir1 == HIGH){
     digitalWrite(LEDpin3, HIGH);
